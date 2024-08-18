@@ -1,26 +1,25 @@
 class Ttysvr < Formula
-  desc "Screensavers for your terminal."
+  desc "Screensavers for your terminal"
   homepage "https://github.com/cxreiff/ttysvr"
-  version "0.2.0"
+  version "0.2.1"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.0/ttysvr-aarch64-apple-darwin.tar.xz"
-      sha256 "6479b9fdd31701c4e8e75fc50e945f206b494d3ecfbf94d7f8691b72c992127b"
+      url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.1/ttysvr-aarch64-apple-darwin.tar.xz"
+      sha256 "539e74012bcd5a018a69c621f9e0977b24798becbd995a95a9124173e8339933"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.0/ttysvr-x86_64-apple-darwin.tar.xz"
-      sha256 "2b7874242895f231b8ed35876d81600d3f3c153e9ece81ddc0509bb78d093fc9"
+      url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.1/ttysvr-x86_64-apple-darwin.tar.xz"
+      sha256 "6c888cab8543c468a230f680997eb04b8259aedf8225beed21cf58a2ebac6d3b"
     end
   end
-  if OS.linux?
-    if Hardware::CPU.intel?
-      url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.0/ttysvr-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "6a62b178863afd3b2cff5a51116a77178df7d37786d9220ec05c247a72e90f8e"
-    end
+  if OS.linux? && Hardware::CPU.intel?
+    url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.1/ttysvr-x86_64-unknown-linux-gnu.tar.xz"
+    sha256 "6558c6f9b7306f1ca0ce9534ad2e96ae4320e5fc9c9128f0dd561951ae33ede2"
   end
   license "MIT OR Apache-2.0"
 
-  BINARY_ALIASES = {"aarch64-apple-darwin": {}, "x86_64-apple-darwin": {}, "x86_64-pc-windows-gnu": {}, "x86_64-unknown-linux-gnu": {}}
+  BINARY_ALIASES = { "aarch64-apple-darwin": {}, "x86_64-apple-darwin": {}, "x86_64-pc-windows-gnu": {},
+"x86_64-unknown-linux-gnu": {} }.freeze
 
   def target_triple
     cpu = Hardware::CPU.arm? ? "aarch64" : "x86_64"
@@ -38,15 +37,9 @@ class Ttysvr < Formula
   end
 
   def install
-    if OS.mac? && Hardware::CPU.arm?
-      bin.install "ttysvr"
-    end
-    if OS.mac? && Hardware::CPU.intel?
-      bin.install "ttysvr"
-    end
-    if OS.linux? && Hardware::CPU.intel?
-      bin.install "ttysvr"
-    end
+    bin.install "ttysvr" if OS.mac? && Hardware::CPU.arm?
+    bin.install "ttysvr" if OS.mac? && Hardware::CPU.intel?
+    bin.install "ttysvr" if OS.linux? && Hardware::CPU.intel?
 
     install_binary_aliases!
 
