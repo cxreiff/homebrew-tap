@@ -16,7 +16,7 @@ class Ttysvr < Formula
     url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.1/ttysvr-x86_64-unknown-linux-gnu.tar.xz"
     sha256 "6558c6f9b7306f1ca0ce9534ad2e96ae4320e5fc9c9128f0dd561951ae33ede2"
   end
-  license "MIT OR Apache-2.0"
+  license any_of: ["MIT", "Apache-2.0"]
 
   BINARY_ALIASES = { "aarch64-apple-darwin": {}, "x86_64-apple-darwin": {}, "x86_64-pc-windows-gnu": {},
 "x86_64-unknown-linux-gnu": {} }.freeze
