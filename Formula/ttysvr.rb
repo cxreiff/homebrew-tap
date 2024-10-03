@@ -1,25 +1,29 @@
 class Ttysvr < Formula
-  desc "Screensavers for your terminal"
+  desc "Screensavers for your terminal."
   homepage "https://github.com/cxreiff/ttysvr"
-  version "0.2.1"
+  version "0.3.0"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.1/ttysvr-aarch64-apple-darwin.tar.xz"
-      sha256 "539e74012bcd5a018a69c621f9e0977b24798becbd995a95a9124173e8339933"
+      url "https://github.com/cxreiff/ttysvr/releases/download/v0.3.0/ttysvr-aarch64-apple-darwin.tar.xz"
+      sha256 "22a5929465381d51bd9c864c8eb14830e1aefb718a5fe4fd9754aba870771a36"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.1/ttysvr-x86_64-apple-darwin.tar.xz"
-      sha256 "6c888cab8543c468a230f680997eb04b8259aedf8225beed21cf58a2ebac6d3b"
+      url "https://github.com/cxreiff/ttysvr/releases/download/v0.3.0/ttysvr-x86_64-apple-darwin.tar.xz"
+      sha256 "4349100db2f34dec17c3a300b9ea6c675c86ccf609a519a1731124a604dc0631"
     end
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/cxreiff/ttysvr/releases/download/v0.2.1/ttysvr-x86_64-unknown-linux-gnu.tar.xz"
-    sha256 "6558c6f9b7306f1ca0ce9534ad2e96ae4320e5fc9c9128f0dd561951ae33ede2"
+    url "https://github.com/cxreiff/ttysvr/releases/download/v0.3.0/ttysvr-x86_64-unknown-linux-gnu.tar.xz"
+    sha256 "17f39d8ddd8560bed0dc654f6a770408c211b13907deab4f110af659eaf10357"
   end
   license any_of: ["MIT", "Apache-2.0"]
 
-  BINARY_ALIASES = { "aarch64-apple-darwin": {}, "x86_64-apple-darwin": {}, "x86_64-pc-windows-gnu": {},
-"x86_64-unknown-linux-gnu": {} }.freeze
+  BINARY_ALIASES = {
+    "aarch64-apple-darwin":     {},
+    "x86_64-apple-darwin":      {},
+    "x86_64-pc-windows-gnu":    {},
+    "x86_64-unknown-linux-gnu": {},
+  }.freeze
 
   def target_triple
     cpu = Hardware::CPU.arm? ? "aarch64" : "x86_64"
